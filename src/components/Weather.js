@@ -22,25 +22,27 @@ class Weather extends Component {
     }
     render() {
         return (
-            <div className="row justify-content-center">
-                <div className="col-12 col-md-6">
-                    <h1>Weather</h1>
-                    {this.state.weatherList.map(weather => (
-                        <div className="col-12 col-md-8 col-lg-4">
+            <div className="">
+                <h1>Weather</h1>
+                {this.state.weatherList.map(weather => (
+                    <div className="row justify-content-center" key={weather.id}>
+                        <div className="col-12 col-md-8 col-lg-4" >
                             <div className="card">
                                 <div className="card-head">
                                     <h5 className="card-title">{weather.name} </h5>
+                                    <img src={"https://openweathermap.org/img/w/" + weather.weather[0].icon + ".png"} alt={weather.weather[0].description}/>
                                 </div>
                                 <div className="card-body">
-                                    <h5 className="card-title">{weather.weather[0].description}</h5>
+                                    <h5 className="card-title">{weather.weather[0].description}
+                                    </h5>
                                     <p className="card-text">Current Temp: {weather.main.temp}</p>
                                     <p className="card-text">Min Temp: {weather.main.temp_min}</p>
                                     <p className="card-text">Max Temp: {weather.main.temp_max}</p>
                                 </div>
                             </div>
                         </div>
-                        ))}
-                </div>
+                    </div>
+                ))}
             </div>
         );
     }
