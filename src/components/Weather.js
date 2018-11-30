@@ -1,38 +1,19 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 
 class Weather extends Component {
-    constructor() {
-        super();
-        this.state = {
-            weatherList: []
-        }
-    }
-    componentWillMount() {
-        axios.get('https://api.openweathermap.org/data/2.5/group?id=2650225,2673730&units=metric&APPID=2224f0fb90f0d015e442ca2c30f99d9d')
-            .then(response => {
-                // We set the latest prices in the state to the prices gotten from Cryptocurrency.
-                this.setState({ weatherList: response.data.list });
-                console.log(this.state.weatherList);
-            })
-            // Catch any error here
-            .catch(error => {
-                console.log(error)
-            })
-    }
     render() {
         return (
             <div className="">
                 <h1>Weather</h1>
-                {this.state.weatherList.map(weather => (
+                {this.props.weatherList.map(weather => (
                     <div className="row justify-content-center" key={weather.id}>
                         <div className="col-12 col-md-8 col-lg-4" >
-                            <div className="card">
-                                <div className="card-head">
-                                    <h5 className="card-title">{weather.name} </h5>
-                                    <img src={"https://openweathermap.org/img/w/" + weather.weather[0].icon + ".png"} alt={weather.weather[0].description}/>
+                            <div className="card mb-4">
+                                <div className="card-head p-3 bg-light">
+                                    <h5 className="card-title mb-0">{weather.name} </h5>
                                 </div>
                                 <div className="card-body">
+                                    <img className="mb-2" src={"https://openweathermap.org/img/w/" + weather.weather[0].icon + ".png"} alt={weather.weather[0].description}/>
                                     <h5 className="card-title">{weather.weather[0].description}
                                     </h5>
                                     <p className="card-text">Current Temp: {weather.main.temp}</p>
